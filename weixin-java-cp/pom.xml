@@ -10,6 +10,7 @@
     <version>4.0.7.B-SNAPSHOT</version>
   </parent>
 
+
   <artifactId>weixin-java-cp</artifactId>
   <name>WxJava - CP Java SDK</name>
   <description>微信企业号/企业微信 Java SDK</description>
