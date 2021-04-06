@@ -2,6 +2,7 @@ package me.chanjar.weixin.cp.bean.external;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
+import me.chanjar.weixin.cp.bean.external.msg.Attachment;
 import me.chanjar.weixin.cp.bean.external.msg.Image;
 import me.chanjar.weixin.cp.bean.external.msg.Link;
 import me.chanjar.weixin.cp.bean.external.msg.MiniProgram;
@@ -9,6 +10,7 @@ import me.chanjar.weixin.cp.bean.external.msg.Text;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 新客户欢迎语.
@@ -33,6 +35,8 @@ public class WxCpWelcomeMsg implements Serializable {
   private Link link;
 
   private MiniProgram miniprogram;
+
+  private Attachment[] attachments;
 
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
