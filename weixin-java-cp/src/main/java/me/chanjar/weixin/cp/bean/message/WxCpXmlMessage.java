@@ -41,6 +41,7 @@ import java.util.Map;
 public class WxCpXmlMessage implements Serializable {
   private static final long serialVersionUID = -1042994982179476410L;
 
+
   /**
    * 使用dom4j解析的存放所有xml属性和值的map.
    */
@@ -49,6 +50,43 @@ public class WxCpXmlMessage implements Serializable {
   ///////////////////////
   // 以下都是微信推送过来的消息的xml的element所对应的属性
   ///////////////////////
+
+  /**
+   * 	变更详情。目前有以下几种：
+   * add_member : 成员入群
+   * del_member : 成员退群
+   * change_owner : 群主变更
+   * change_name : 群名变更
+   * change_notice : 群公告变更
+   */
+  @XStreamAlias("UpdateDetail")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String updateDetail;
+
+  /**
+   * 	当是成员退群时有值。表示成员的退群方式
+   * 0 - 自己退群
+   * 1 - 群主/群管理员移出
+   */
+  @XStreamAlias("QuitScene")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private Integer quitScene;
+
+  /**
+   * 	当是成员入群时有值。表示成员的入群方式
+   * 0 - 由成员邀请入群（包括直接邀请入群和通过邀请链接入群）
+   * 3 - 通过扫描群二维码入群
+   */
+  @XStreamAlias("JoinScene")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private Integer JoinScene;
+
+  /**
+   * 当是成员入群或退群时有值。表示成员变更数量
+   */
+  @XStreamAlias("MemChangeCnt")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String MemChangeCnt;
 
   @XStreamAlias("AgentID")
   private Integer agentId;

@@ -76,6 +76,22 @@ public class WxCpUserExternalGroupChatInfo extends WxCpBaseResp {
     @SerializedName("join_scene")
     private int joinScene;
 
+    /**
+     * 邀请者。目前仅当是由本企业内部成员邀请入群时会返回该值
+     */
+    @SerializedName("invitor")
+    private Invitor invitor;
+  }
+
+  @Getter
+  @Setter
+  public static class Invitor{
+
+    /**
+     * 邀请者的userid
+     */
+    @SerializedName("userid")
+    private String userId;
   }
 
   public static WxCpUserExternalGroupChatInfo fromJson(String json) {
