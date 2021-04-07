@@ -36,7 +36,7 @@ public class WxCpWelcomeMsg implements Serializable {
 
   private MiniProgram miniprogram;
 
-  private Attachment[] attachments;
+  private List<Attachment> attachments;
 
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
