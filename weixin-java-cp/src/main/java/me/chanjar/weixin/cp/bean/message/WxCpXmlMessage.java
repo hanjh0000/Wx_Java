@@ -70,7 +70,7 @@ public class WxCpXmlMessage implements Serializable {
    */
   @XStreamAlias("QuitScene")
   @XStreamConverter(value = XStreamCDataConverter.class)
-  private Integer quitScene;
+  private Byte quitScene;
 
   /**
    * 	当是成员入群时有值。表示成员的入群方式
@@ -79,7 +79,7 @@ public class WxCpXmlMessage implements Serializable {
    */
   @XStreamAlias("JoinScene")
   @XStreamConverter(value = XStreamCDataConverter.class)
-  private Integer JoinScene;
+  private Byte JoinScene;
 
   /**
    * 当是成员入群或退群时有值。表示成员变更数量
