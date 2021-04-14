@@ -129,7 +129,7 @@ public class WxCpXmlMessage implements Serializable {
   private String content;
 
   @XStreamAlias("MsgId")
-  private String msgId;
+  private Long msgId;
 
   @XStreamAlias("PicUrl")
   @XStreamConverter(value = XStreamCDataConverter.class)
