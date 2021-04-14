@@ -1,7 +1,7 @@
 ## WxJava - 微信开发 Java SDK
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.binarywang/wx-java.svg)](http://mvnrepository.com/artifact/com.github.binarywang/wx-java)
-[![Build Status](https://travis-ci.org/Wechat-Group/WxJava.svg?branch=develop)](https://travis-ci.org/Wechat-Group/WxJava)
+[![Build Status](https://github.com/hanjh0000/Wx_Java/workflows/deploy%20to%20snapshot/badge.svg)](https://github.com/hanjh0000/Wx_Java)
 
 #### Fork from [WxJava](https://github.com/Wechat-Group/WxJava)
 

@@ -10,6 +10,7 @@ import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 /**
@@ -47,6 +48,8 @@ public class WxCpMessageRouterRule {
 
   private List<WxCpMessageInterceptor> interceptors = new ArrayList<>();
 
+  private Map<Predicate<WxCpXmlMessage>, String> messagesCondition = new HashMap<>();
+
   /**
    * Instantiates a new Wx cp message router rule.
    *
@@ -64,6 +67,18 @@ public class WxCpMessageRouterRule {
    */
   public WxCpMessageRouterRule async(boolean async) {
     this.async = async;
+    return this;
+  }
+
+  public WxCpMessageRouterRule send(String topic){
+    if (!StringUtils.isEmpty(topic)) messagesCondition.put(wxCpXmlMessage -> true,topic);
+    return this;
+  }
+
+  public WxCpMessageRouterRule send(Predicate<WxCpXmlMessage> predicate, String topic) {
+    if (predicate != null && !StringUtils.isEmpty(topic)) {
+      messagesCondition.put(predicate, topic);
+    }
     return this;
   }
 

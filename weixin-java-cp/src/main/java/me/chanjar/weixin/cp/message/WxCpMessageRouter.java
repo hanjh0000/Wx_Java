@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
+import java.util.function.Predicate;
 
 /**
  * <pre>
@@ -63,6 +64,8 @@ public class WxCpMessageRouter {
 
   private WxErrorExceptionHandler exceptionHandler;
 
+  private MessageProducer messageProducer;
+
   /**
    * 构造方法.
    */
@@ -74,6 +77,11 @@ public class WxCpMessageRouter {
     this.messageDuplicateChecker = new WxMessageInMemoryDuplicateChecker();
     this.sessionManager = wxCpService.getSessionManager();
     this.exceptionHandler = new LogExceptionHandler();
+    this.messageProducer = (topic,message) -> log.error("Please set producer use setMessageProducer method");
+  }
+
+  public void setMessageProducer(MessageProducer messageProducer){
+    this.messageProducer = messageProducer;
   }
 
   /**
@@ -167,8 +175,20 @@ public class WxCpMessageRouter {
         log.debug("End session access: async=false, sessionId={}", wxMessage.getFromUserName());
         sessionEndAccess(wxMessage);
       }
+
+      //需要发消息
+      if (rule.getMessagesCondition().size() != 0) {
+        for (Map.Entry<Predicate<WxCpXmlMessage>, String> entry : rule.getMessagesCondition().entrySet()) {
+          if (entry.getKey().test(wxMessage)) {
+            futures.add(
+                    this.executorService.submit(() -> messageProducer.push(entry.getValue(), wxMessage))
+            );
+          }
+        }
+      }
     }
 
+    //如果是异步执行
     if (futures.size() > 0) {
       this.executorService.submit(() -> {
         for (Future future : futures) {
