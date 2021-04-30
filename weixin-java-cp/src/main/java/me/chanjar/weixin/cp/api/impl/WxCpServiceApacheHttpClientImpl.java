@@ -71,7 +71,8 @@ public class WxCpServiceApacheHttpClientImpl extends BaseWxCpServiceImpl<Closeab
         }
 
         WxAccessToken accessToken = WxAccessToken.fromJson(resultContent);
-        this.configStorage.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
+//        this.configStorage.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
+        this.configStorage.updateAccessToken("ttAJ4c_Jq-5BqHHaUl5HUsFM0FCJdIRNZLwSSjXBVqXgoKB6mGugkTWaWumuYsePAzodOacYLRfInpEQCQU-KprzW3XeCy_QL1lXJn8AyF6JP95HmYTPKqM5lKURxGGQG6ffPuZtV3mK0qMJ24qw83xx-XgTdNQpwEUEXaKQlg3NVmVQCwodlFWFXmRzSzvUitfjlJfRwmjD53fInHIgGA", 7200);
       } catch (IOException e) {
         throw new WxRuntimeException(e);
       }
